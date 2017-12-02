@@ -10,6 +10,7 @@ import retrofit.longzhu.com.buidertoobar.navigation.INavagation;
 
 /**
  * UI显示：该类就是产品类
+ * 该类是针对所有导航条场景
  */
 
 public abstract class AbsNavigation<P extends AbsNavigation.AbsNavigationParam> implements INavagation {
