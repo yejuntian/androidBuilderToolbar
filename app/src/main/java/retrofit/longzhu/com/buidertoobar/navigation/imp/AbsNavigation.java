@@ -36,16 +36,32 @@ public abstract class AbsNavigation<P extends AbsNavigation.AbsNavigationParam> 
             return;
         }
         if (contentView == null) {
-            contentView = param.inflater.inflate(bindLayoutId(), param.parent, false);
-        } else {
-            //将来刷新视图
-            ViewParent parent = contentView.getParent();
-            if (parent != null) {
-                ViewGroup viewGroup = (ViewGroup) parent;
-                viewGroup.removeAllViews();
-            }
+            contentView = bindParent(bindLayoutId(),param.parent);
         }
-        param.parent.addView(contentView,0);
+    }
+
+    public ViewGroup bindParent(int layoutId, ViewGroup parent) {
+        View childView = param.inflater.inflate(layoutId, parent, false);
+        return bindParent(childView, parent);
+    }
+
+    public ViewGroup bindParent(View childView, ViewGroup parent) {
+        //将来刷新视图
+        ViewParent viewParent = childView.getParent();
+        if (parent != null) {
+            ViewGroup viewGroup = (ViewGroup) viewParent;
+            viewGroup.removeAllViews();
+        }
+        parent.addView(childView,0);
+        return (ViewGroup) childView;
+    }
+
+    public P getParam() {
+        return param;
+    }
+
+    public View getContentView() {
+        return contentView;
     }
 
     /**
