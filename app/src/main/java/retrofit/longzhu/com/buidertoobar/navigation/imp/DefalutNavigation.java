@@ -1,6 +1,9 @@
 package retrofit.longzhu.com.buidertoobar.navigation.imp;
 
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.lang.reflect.Parameter;
 
@@ -35,6 +38,10 @@ public abstract class DefalutNavigation<P extends AbsNavigation.AbsNavigationPar
         bindParent(bindLeftLayoutId(), leftLinearLayout);
         bindParent(bindCenterLayoutId(), centerLinearLayout);
         bindParent(bindRightLayoutId(), rightLinearLayout);
+
+        initLeftLayout(leftLinearLayout);
+        initCenterLayout(centerLinearLayout);
+        initRightLayout(rightLinearLayout);
     }
 
     /**
@@ -73,7 +80,6 @@ public abstract class DefalutNavigation<P extends AbsNavigation.AbsNavigationPar
      * @param parent
      */
     public void initCenterLayout(LinearLayout parent) {
-
     }
 
     /**
@@ -82,7 +88,6 @@ public abstract class DefalutNavigation<P extends AbsNavigation.AbsNavigationPar
      * @param parent
      */
     public void initRightLayout(LinearLayout parent) {
-
     }
 
     /**
@@ -96,7 +101,7 @@ public abstract class DefalutNavigation<P extends AbsNavigation.AbsNavigationPar
         layoutParams.weight = weight;
         linearLayout.setLayoutParams(layoutParams);
         //绑定父容器布局
-        bindParent(linearLayout, getParam().parent);
+        bindParent(linearLayout, (ViewGroup) getContentView());
         return linearLayout;
     }
 }

@@ -1,6 +1,7 @@
 package retrofit.longzhu.com.buidertoobar.navigation.imp;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,9 @@ public abstract class AbsNavigation<P extends AbsNavigation.AbsNavigationParam> 
     }
 
     public ViewGroup bindParent(int layoutId, ViewGroup parent) {
+        if (layoutId == DEFALT_LAYOUT || parent == null) {
+            return null;
+        }
         View childView = param.inflater.inflate(layoutId, parent, false);
         return bindParent(childView, parent);
     }
@@ -48,10 +52,11 @@ public abstract class AbsNavigation<P extends AbsNavigation.AbsNavigationParam> 
     public ViewGroup bindParent(View childView, ViewGroup parent) {
         //将来刷新视图
         ViewParent viewParent = childView.getParent();
-        if (parent != null) {
+        if (viewParent != null) {
             ViewGroup viewGroup = (ViewGroup) viewParent;
             viewGroup.removeAllViews();
         }
+
         parent.addView(childView,0);
         return (ViewGroup) childView;
     }
@@ -72,7 +77,7 @@ public abstract class AbsNavigation<P extends AbsNavigation.AbsNavigationParam> 
 
         }
 
-        public abstract INavagation build();
+        public abstract INavagation builder();
     }
 
     public static class AbsNavigationParam {
@@ -86,6 +91,14 @@ public abstract class AbsNavigation<P extends AbsNavigation.AbsNavigationParam> 
             this.parent = parent;
             inflater = LayoutInflater.from(context);
         }
+    }
+
+    public Drawable getImageRes(int res){
+       return getParam().context.getResources().getDrawable(res);
+    }
+
+    public String getString(int id){
+        return getParam().context.getResources().getString(id);
     }
 
 }
