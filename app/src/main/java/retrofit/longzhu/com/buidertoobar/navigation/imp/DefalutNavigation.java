@@ -1,11 +1,9 @@
 package retrofit.longzhu.com.buidertoobar.navigation.imp;
 
+import android.graphics.Color;
+import android.view.Gravity;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import java.lang.reflect.Parameter;
 
 import retrofit.longzhu.com.buidertoobar.R;
 
@@ -22,7 +20,7 @@ public abstract class DefalutNavigation<P extends AbsNavigation.AbsNavigationPar
 
     @Override
     public int bindLayoutId() {
-        return R.layout.navigation_layout;
+        return R.layout.navigation_default_layout;
     }
 
     @Override
@@ -30,9 +28,9 @@ public abstract class DefalutNavigation<P extends AbsNavigation.AbsNavigationPar
         //千万不能忘记
         super.build();
         //动态的场景导航条布局
-        LinearLayout leftLinearLayout = createChildLayout(1.0f);
-        LinearLayout centerLinearLayout = createChildLayout(2.0f);
-        LinearLayout rightLinearLayout = createChildLayout(1.0f);
+        LinearLayout rightLinearLayout = createChildLayout(1.0f, Color.BLUE);
+        LinearLayout centerLinearLayout = createChildLayout(2.0f, Color.YELLOW);
+        LinearLayout leftLinearLayout = createChildLayout(1.0f, Color.RED);
 
         //回调定义好的规范方法
         bindParent(bindLeftLayoutId(), leftLinearLayout);
@@ -95,10 +93,12 @@ public abstract class DefalutNavigation<P extends AbsNavigation.AbsNavigationPar
      *
      * @return
      */
-    private LinearLayout createChildLayout(float weight) {
+    private LinearLayout createChildLayout(float weight,int color) {
         LinearLayout linearLayout = new LinearLayout(getParam().context);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
         layoutParams.weight = weight;
+        layoutParams.gravity = Gravity.CENTER_VERTICAL;
+        linearLayout.setBackgroundColor(color);
         linearLayout.setLayoutParams(layoutParams);
         //绑定父容器布局
         bindParent(linearLayout, (ViewGroup) getContentView());
