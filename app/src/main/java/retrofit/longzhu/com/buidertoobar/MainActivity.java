@@ -18,11 +18,18 @@ public class MainActivity extends AppCompatActivity{
         toolBarContainer = findViewById(R.id.ll_toolbarContainer);
 
         HomeNavagation.Builders build = new HomeNavagation.Builders(this,toolBarContainer);
+        build.setRightImageLeftRes(R.mipmap.ic_launcher);
+        build.setRightImageLeftOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"点击第一个图片",Toast.LENGTH_LONG).show();
+            }
+        });
         build.setRightImageRightRes(R.mipmap.ic_launcher);
         build.setRightImageRightOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"setRightImageRightOnClickListener",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"点击第二个图片",Toast.LENGTH_LONG).show();
             }
         });
         build.builder().build();

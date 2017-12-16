@@ -1,7 +1,6 @@
 package retrofit.longzhu.com.buidertoobar.navigation.imp;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -99,14 +98,19 @@ public class HomeNavagation extends DefalutNavigation<HomeNavagation.HomeNavagat
 
     @Override
     public void initCenterLayout(LinearLayout parent) {
-        TextView textView =  parent.findViewById(R.id.tv_title);
+        TextView textView = parent.findViewById(R.id.tv_title);
         textView.setText(getString(R.string.home_toolbar_name));
     }
 
     @Override
     public void initRightLayout(LinearLayout parent) {
+        //设置点击事件
         ImageView imageView = parent.findViewById(R.id.iv);
         imageView.setImageDrawable(getImageRes(getParam().rightImageRightRes));
         imageView.setOnClickListener(getParam().rightImageRightOnClickListener);
+
+        ImageView imageView2 = parent.findViewById(R.id.iv2);
+        imageView2.setImageDrawable(getImageRes(getParam().rightImageLeftRes));
+        imageView2.setOnClickListener(getParam().rightImageLeftOnClickListener);
     }
 }
